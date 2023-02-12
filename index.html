@@ -8,17 +8,14 @@
 <body class="flex flex-col">
 
 <header class="flex">
-	<div class="brand">
-    <h1>My Portfolio</h1>
-	</div>
-	<nav>
+	 <nav>
     <div class="themes">
       <span class="picker"></span>
     </div>
     <div class="menu">
       <span class="menu-toggler">=</span>
     </div>
-	</nav>
+	 </nav>
 </header>
 
 <main class="flex flex-col">
@@ -30,7 +27,7 @@
       <span></span>
       <h2>
         <input id="about-radio" type="radio" name="content" checked />
-        <label for="about-radio">&lt; ABOUT ME /&gt;</label>
+        <label for="about-radio">&lt; <span>about me</span> /&gt;</label>
       </h2>
     </div>
     <div class="body">
@@ -48,7 +45,7 @@
       <span></span>
       <h2>
         <input id="skill-radio" type="radio" name="content" />
-        <label for="skill-radio">&lt; MAIN SKILLS /&gt;</label>
+        <label for="skill-radio">&lt; <span>main skills</span> /&gt;</label>
       </h2>
     </div>
     <div class="body">
@@ -64,7 +61,7 @@
       <span></span>
       <h2>
         <input id="contact-radio" type="radio" name="content" />
-        <label for="contact-radio">&lt; CONTACT ME /&gt;</label>
+        <label for="contact-radio">&lt; <span>contact me</span> /&gt;</label>
       </h2>
     </div>
     <div class="body">
@@ -73,6 +70,46 @@
   </div>
 </main>
 
-<script type="text/css" src="assets/js/main.js"></script>
+<script>
+
+const contentBtn = document.querySelectorAll('.content .head input');
+
+contentBtn.forEach(btn => {
+  btn.onclick = event => {
+    const contName = event.target.id.split('-')[0];
+    const activeCont = document.querySelector(`.content.${contName}`);
+    const inactiveConts = document.querySelectorAll(`.content:not(.${contName})`);
+
+    activeCont.classList.add('active');
+    inactiveConts.forEach(cont => cont.classList.remove('active'));
+
+    decorateHead();
+  }
+});
+
+
+function decorateHead() {
+  const label = document.querySelector('.active .head label > span');
+  let html = '';
+  for (let i=0; i<label.innerText.length; i++) {
+    const delay = .1 * i;
+    html += `<span style="--delay: ${delay}s">`
+      + label.innerText[i] +
+    '</span>';
+  }
+  label.innerHTML = html;
+}
+
+
+window.onload = () => {
+  document.querySelectorAll('link[rel=preload]').forEach(link => {
+    link.rel = 'stylesheet';
+  });
+  decorateHead();
+}
+
+
+</script>
+<!--script type="text/css" src="assets/js/main.js"></script-->
 </body>
 </html>
