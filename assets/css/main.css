@@ -1,7 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
-  font: 6vw Calistoga;
+ font: 6vw Calistoga;
 	box-sizing: border-box;
 	color: #eee;
 }
@@ -36,8 +36,12 @@ body{
 /* header */
 
 header{
-	justify-content: space-between;
+  justify-content: space-between;
   padding: 0 .8rem;
+}
+
+header h1, .body{
+  z-index: -1;
 }
 
 .themes span.picker{
@@ -74,11 +78,6 @@ main .content .head{
   display: none;
 }
 
-.content .head input:checked + label{
-  background: #66a;
-  flex: 1;
-}
-
 main .content .body{
 	font-size: 30px;
 	height: 0;
@@ -93,6 +92,12 @@ main .content.active{
 	order: 1;
 }
 
+main .content.active .head{
+  background: #66c;
+  padding-block: .3rem;
+  transition: background .6s, padding-block .4s;
+}
+
 .active .head > span{
   --anm-duration: 2s;
   --anm-delay: 1s;
@@ -105,25 +110,29 @@ main .content.active{
   animation: border var(--anm-duration) linear infinite;
 }
 
-.head > span:nth-child(1),
-.head > span:nth-child(2){
+.active .head > span:nth-child(1),
+.active .head > span:nth-child(2){
   --from: -1;
   --to: 1;
   --grad-dir: right;
   top: 0;
 }
 
-.head > span:nth-child(3),
-.head > span:nth-child(4){
+.active .head > span:nth-child(3),
+.active .head > span:nth-child(4){
   --from: 1;
   --to: -1;
   --grad-dir: left;
   bottom: 0;
 }
 
-.head > span:nth-child(2),
-.head > span:nth-child(4){
+.active .head > span:nth-child(2),
+.active .head > span:nth-child(4){
   animation-delay: var(--anm-delay);
+}
+
+.active .head label span > span{
+  animation: active-label 1.2s linear infinite var(--delay);
 }
 
 main .content.active .body{
@@ -133,10 +142,12 @@ main .content.active .body{
   height: 100%;
   padding: .8rem 1.8rem;
   opacity: 1;
-	transition: opacity .7s linear, height .7s linear;
+  transition: opacity .7s linear, height .7s linear;
 }
 
 main .content.active .body::before{
+  --x1y1: 0, 0;
+  --x2y2: 0, 0;
   content: "";
   background: #000;
   width: 18vh;
@@ -146,6 +157,12 @@ main .content.active .body::before{
   left: 6%;
   border-radius: 50%;
   filter: blur(3px);
+  z-index: -2;
+  animation: decoration-anm 2s linear infinite;
+}
+
+.content.active{
+  z-index: 1;
 }
 
 main .content.active .glass{
@@ -154,13 +171,14 @@ main .content.active .glass{
   width: 100%;
   padding-top: .4rem;
   backdrop-filter: blur(8px);
+  box-shadow: 2px 3px 3px rgba(255, 255, 255, .1);
   transition: all .4s linear;
 }
 
 main .content.active .glass:hover{
   background: rgba(200, 200, 200, .4);
-  backdrop-filter: blur(20px);
-  box-shadow: 4px 6px 6px rgba(200,200,200, .3);
+  backdrop-filter: blur(30px);
+  box-shadow: 5px 6px 6px rgba(200,200,200, .3);
   transition: all .4s linear;
 }
 
@@ -173,5 +191,26 @@ main .content.active .glass:hover{
   }
   to{
     transform: translateX(calc(100% * var(--to)));
+  }
+}
+
+@keyframes active-label{
+  0%{
+    color: #eee;
+  }
+  20%{
+    color: #99e;
+  }
+  70%, 100%{
+    color: #ea7;
+  }
+}
+
+@keyframes decoration-anm{
+  from{
+    transform: translate(var(--x1y1));
+  }
+  to{
+    transform: translate(var(--x2y2));
   }
 }
