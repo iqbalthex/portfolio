@@ -1,0 +1,177 @@
+*{
+	margin: 0;
+	padding: 0;
+  font: 6vw Calistoga;
+	box-sizing: border-box;
+	color: #eee;
+}
+
+
+/* common class */
+
+.flex{
+	display: flex;
+}
+
+.flex-col{
+	flex-direction: column;
+}
+
+/* common class END */
+
+/* base element */
+
+html, body{
+	width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body{
+	background: #333;
+}
+
+/* base element END */
+
+/* header */
+
+header{
+	justify-content: space-between;
+  padding: 0 .8rem;
+}
+
+.themes span.picker{
+	width: 20px;
+  height: 20px;
+	background: #eee;
+}
+
+/* header END */
+
+
+main{
+	flex-grow: 1;
+}
+
+main .content{
+	display: flex;
+	flex-direction: column;
+	order: 2;
+  text-align: center;
+}
+
+main .content .head{
+  position: relative;
+  overflow: hidden;
+}
+
+.content .head h2{
+  display: flex;
+  justify-content: center;
+}
+
+.content .head input[type=radio]{
+  display: none;
+}
+
+.content .head input:checked + label{
+  background: #66a;
+  flex: 1;
+}
+
+main .content .body{
+	font-size: 30px;
+	height: 0;
+	opacity: 0;
+}
+
+
+/* active content */
+
+main .content.active{
+	height: 100%;
+	order: 1;
+}
+
+.active .head > span{
+  --anm-duration: 2s;
+  --anm-delay: 1s;
+  --anm-color: #0ff;
+  background: linear-gradient(to var(--grad-dir), transparent, var(--anm-color));
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  animation: border var(--anm-duration) linear infinite;
+}
+
+.head > span:nth-child(1),
+.head > span:nth-child(2){
+  --from: -1;
+  --to: 1;
+  --grad-dir: right;
+  top: 0;
+}
+
+.head > span:nth-child(3),
+.head > span:nth-child(4){
+  --from: 1;
+  --to: -1;
+  --grad-dir: left;
+  bottom: 0;
+}
+
+.head > span:nth-child(2),
+.head > span:nth-child(4){
+  animation-delay: var(--anm-delay);
+}
+
+main .content.active .body{
+  display: flex;
+  justify-content: center;
+  background: #a55;
+  height: 100%;
+  padding: .8rem 1.8rem;
+  opacity: 1;
+	transition: opacity .7s linear, height .7s linear;
+}
+
+main .content.active .body::before{
+  content: "";
+  background: #000;
+  width: 18vh;
+  height: 18vh;
+  position: absolute;
+  top: 30%;
+  left: 6%;
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+main .content.active .glass{
+  background: rgba(200, 200, 200, .3);
+  border-radius: 20px;
+  width: 100%;
+  padding-top: .4rem;
+  backdrop-filter: blur(8px);
+  transition: all .4s linear;
+}
+
+main .content.active .glass:hover{
+  background: rgba(200, 200, 200, .4);
+  backdrop-filter: blur(20px);
+  box-shadow: 4px 6px 6px rgba(200,200,200, .3);
+  transition: all .4s linear;
+}
+
+/* active content END */
+
+
+@keyframes border{
+  from{
+    transform: translateX(calc(100% * var(--from)));
+  }
+  to{
+    transform: translateX(calc(100% * var(--to)));
+  }
+}
