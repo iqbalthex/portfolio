@@ -1,27 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<link type="text/css" rel="stylesheet" media="print" href="assets/css/main.css" />
-
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link type="text/css" rel="preload" href="assets/css/fonts.css" />
+  <link type="text/css" rel="stylesheet" href="assets/css/main.css" />
 </head>
 <body class="flex flex-col">
 
-<header>
-  <nav class="flex">
-    <div class="themes" style="border-right: 1px solid red">
-      <span class="picker">O</span>
-      <span class="picker">O</span>
+<header class="flex">
+	 <nav>
+    <div class="themes">
+      <span class="picker"></span>
     </div>
     <div class="menu">
-      <span class="menu-toggler">III</span>
+      <span class="menu-toggler">=</span>
     </div>
-  </nav>
+	 </nav>
 </header>
 
 <main class="flex flex-col">
-  <div class="content about">
+  <div class="content about active">
     <div class="head">
       <span></span>
       <span></span>
@@ -51,9 +49,7 @@
       </h2>
     </div>
     <div class="body">
-      <div class="glass">
-        <p>Web development</p>
-      </div>
+      <p>Web development</p>
     </div>
   </div>
 
@@ -69,13 +65,51 @@
       </h2>
     </div>
     <div class="body">
-      <div class="glass">
-        <p>081231360159</p>
-      </div>
+      <p>081231360159</p>
     </div>
   </div>
 </main>
 
-<script type="text/javascript" src="assets/js/main.js"></script>
+<script>
+
+const contentBtn = document.querySelectorAll('.content .head input');
+
+contentBtn.forEach(btn => {
+  btn.onclick = event => {
+    const contName = event.target.id.split('-')[0];
+    const activeCont = document.querySelector(`.content.${contName}`);
+    const inactiveConts = document.querySelectorAll(`.content:not(.${contName})`);
+
+    activeCont.classList.add('active');
+    inactiveConts.forEach(cont => cont.classList.remove('active'));
+
+    decorateHead();
+  }
+});
+
+
+function decorateHead() {
+  const label = document.querySelector('.active .head label > span');
+  let html = '';
+  for (let i=0; i<label.innerText.length; i++) {
+    const delay = .1 * i;
+    html += `<span style="--delay: ${delay}s">`
+      + label.innerText[i] +
+    '</span>';
+  }
+  label.innerHTML = html;
+}
+
+
+window.onload = () => {
+  document.querySelectorAll('link[rel=preload]').forEach(link => {
+    link.rel = 'stylesheet';
+  });
+  decorateHead();
+}
+
+
+</script>
+<!--script type="text/css" src="assets/js/main.js"></script-->
 </body>
 </html>
