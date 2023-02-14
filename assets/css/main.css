@@ -26,22 +26,24 @@ body{
 
 header nav{
   line-height: 2rem;
-  padding-inline: 1rem;
 }
 
 nav > div{
-  opacity: 0;
+  padding: 0 1rem;
+  opacity: .6;
   width: 100%;
-  animation: init .4s linear forwards;
+  animation: init .6s linear forwards;
 }
 
 nav > div:first-child{
-  --dir: 1;
+  --dir: -1;
+  transform-origin: 100%;
 }
 
 nav > div:last-child{
-  --dir: -1;
+  --dir: 1;
   text-align: right;
+  transform-origin: 0;
 }
 
 nav .menu-toggler{
@@ -156,11 +158,10 @@ main .content.active .head{
 
 @keyframes init{
   0%{
-    transform: translateX(calc(100% * var(--dir)));
+    transform: translate(calc(2rem * var(--dir)), 2rem) rotate(calc(90deg * var(--dir)));
   }
   100%{
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
