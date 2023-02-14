@@ -1,16 +1,33 @@
+const alertEl = document.querySelector('.alert');
+let supportedViewport = true;
+
 window.onload = function() {
-  document.querySelectorAll('link[media=print]')
-    .forEach(link => link.media = 'all');
+  document.querySelectorAll('link[media=print]').forEach(link => link.media = 'all');
+  document.querySelectorAll('.head input[type=radio]').forEach(input => makeContent(input));
 
   setTimeout(() => {
-    document.querySelector('.content.about').classList.add('active');    
+    document.querySelectorAll('.content').forEach(cont => cont.style.display = 'block');
+  }, 950);
+  setTimeout(() => {
+    document.querySelector('.content.about').classList.add('active');
     decorActive();
-  }, 0);
-
-  document.querySelectorAll('.head input[type=radio]')
-    .forEach(input => makeContent(input));
+  }, 1000);
 }
 
+window.onresize = function() {
+  supportedViewport = window.innerWidth > 360 && window.innerWidth < 600;
+  if (!supportedViewport) {
+    aleret();
+  }
+}
+
+
+function aleret() {
+  alertEl.style.animation = 'alert 1.5s';
+  setTimeout(() => {
+    alertEl.style.animation = 'unset';
+  }, 2500);
+}
 
 function makeContent(input) {
   const contName = input.id.split('-')[0];
