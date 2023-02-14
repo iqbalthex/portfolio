@@ -1,0 +1,186 @@
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+  font-size: 1.2rem;
+	color: #eee;
+}
+
+html{
+  background: #222;
+  height: 100%;
+}
+
+
+body{
+  background: #373737;
+  margin: auto;
+  min-width: 360px;
+  max-width: 540px;
+  height: 100%;
+}
+
+.flex{display:flex}
+.flex-col{flex-direction:column}
+.just-cont-center{justify-content:center}
+
+header nav{
+  line-height: 2rem;
+  padding-inline: 1rem;
+}
+
+nav > div{
+  opacity: 0;
+  width: 100%;
+  animation: init .4s linear forwards;
+}
+
+nav > div:first-child{
+  --dir: 1;
+}
+
+nav > div:last-child{
+  --dir: -1;
+  text-align: right;
+}
+
+nav .menu-toggler{
+  transform-origin: 0 0;
+  transform: rotate(90deg);
+}
+
+main{
+  height: 100%;
+  text-align: center;
+}
+
+main .content{
+  flex-grow: 0;
+  order: 2;
+  border-block: 1px solid yellow
+}
+
+main .content.active{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  order: 1;
+  position: relative;
+}
+
+main .content .head{
+  top: 100%;
+}
+
+main .content.active .head{
+  background: #33e;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+  transition: top .4s ease-out;
+}
+
+.head input[type=radio]{
+  display: none;
+}
+
+.active .head span > span{
+  animation: active-label 1.2s linear infinite var(--delay);
+}
+
+.active .head > span{
+  --anm-duration: 2s;
+  --anm-delay: -1s;
+  --anm-color: #0ff;
+  background: linear-gradient(to var(--grad-dir), transparent, var(--anm-color));
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  animation: border var(--anm-duration) linear infinite;
+}
+
+.active .head > span:nth-child(1),
+.active .head > span:nth-child(2){
+  --from: -1;
+  --to: 1;
+  --grad-dir: right;
+  top: 0;
+}
+
+.active .head > span:nth-child(3),
+.active .head > span:nth-child(4){
+  --from: 1;
+  --to: -1;
+  --grad-dir: left;
+  bottom: 0;
+}
+
+.active .head > span:nth-child(2),
+.active .head > span:nth-child(4){
+  animation-delay: var(--anm-delay);
+}
+
+.content > .body{
+  height: 0;
+  overflow: hidden;
+}
+
+.content.active > .body{
+  display: flex;
+  justify-content: center;
+  padding: 3.6rem 3rem 2rem;
+  height: 100%;
+}
+
+.body > .glass{
+  opacity: 0;
+  transform: scale(.4, .2);
+}
+
+.active .body > .glass{
+  background: #ddd;
+  padding: 1rem 2rem;
+  border-radius: 16px;
+  opacity: 1;
+  transform: scale(1, 1);
+  transition: opacity 1s, transform .6s .2s;
+}
+
+.glass p{
+  /* font-size: 1.1rem; */
+  color: #555;
+}
+
+
+@keyframes init{
+  0%{
+    transform: translateX(calc(100% * var(--dir)));
+  }
+  100%{
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes active-label{
+  0%{
+    color: #ddd;
+  }
+  70%{
+    color: #aee;
+  }
+  100%{
+    color: #ea7;
+  }
+}
+
+@keyframes border{
+  from{
+    transform: translateX(calc(100% * var(--from)));
+  }
+  to{
+    transform: translateX(calc(100% * var(--to)));
+  }
+}
