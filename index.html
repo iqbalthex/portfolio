@@ -14,13 +14,25 @@
       <span class="picker">O</span>
       <span class="picker">O</span>
     </div>
-    <div class="menu">
-      <span class="menu-toggler">=</span>
+    <div class="menu flex flex-col">
+      <div class="menu-toggler flex">
+        <input type="checkbox" />
+        <span>=</span>
+      </div>
+      <div class="menu-dropdown">
+        <div class="flex flex-col">
+          <button class="active">HOME</button>
+          <button>SKILLS</button>
+          <button>CERTIFICATES</button>
+        </div>
+      </div>
     </div>
   </nav>
 </header>
 
-<main class="flex flex-col">
+<main>
+
+<section class="home flex flex-col">
   <div class="content about">
     <div class="head">
       <span></span>
@@ -74,7 +86,12 @@
       <div class="glass">
         <div>
           <p>
-            <a href="https://github.com/iqbalthex"><i>GH</i><span>iqbalthex</span></a>
+            <a href="https://github.com/iqbalthex">
+              <svg width="32" height="32">
+                <path d="" />
+              </svg>
+              <span>iqbalthex</span>
+            </a>
           </p>
           <p>
             <a href="https://wa.me/6285156312621"><i>WA</i><span>085156312621</span></a>
@@ -86,9 +103,14 @@
       </div>
     </div>
   </div>
-</main>
+</section>
 
-<div class="alert">Maaf, tampilan untuk viewport lebih dari 600px belum jadi</div>
+<section class="certif">
+  <div class="">ahay
+  </div>
+</section>
+
+</main>
 
 <script type="text/javascript" src="assets/js/main.js"></script>
 </body>
