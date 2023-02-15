@@ -119,12 +119,13 @@ main{
 }
 
 section{
+  display: none;
   position: absolute;
 }
 
 section.home{
-  display: none;
-  transform: translateX(100%);
+  display: initial;
+  /* transform: translateX(100%); */
 }
 
 section.home .content{
