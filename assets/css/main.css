@@ -2,8 +2,9 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
-  font-size: 1.2rem;
+ font-size: 1.2rem;
 	color: #eee;
+	user-select: none;
 }
 
 html{
@@ -124,8 +125,8 @@ section{
 }
 
 section.home{
-  display: initial;
-  /* transform: translateX(100%); */
+  display: block;
+  ransform: translateX(100%);
 }
 
 section.home .content{
@@ -133,7 +134,7 @@ section.home .content{
   flex-grow: 0;
   order: 2;
   text-align: center;
-  border-block: 1px solid yellow;
+  order-block: 1px solid yellow;
 }
 
 section.home .content.active{
@@ -207,7 +208,7 @@ section.home .content.active .head{
 .content.active > .body{
   display: flex;
   justify-content: center;
-  padding: 3.6rem 3rem 2rem;
+  padding: 3.6rem 1.4rem 2rem;
   height: 100%;
   animation: active-body .8s linear forwards;
 }
@@ -222,7 +223,7 @@ section.home .content.active .head{
   flex-direction: column;
   justify-content: space-between;
   background: rgba(223, 223, 223, .4);
-  padding: 1rem 2rem;
+  padding: 1rem .6rem;
   border-radius: 16px;
   opacity: 1;
   transform: scale(1, 1);
@@ -252,7 +253,7 @@ section.home .content.active .head{
 
 .glass button{
   background: #ee8;
-  margin: 0 auto;
+  margin: .5rem auto 0;
   padding: 4px 10px;
   border: none;
   border-radius: 8px;
@@ -269,11 +270,19 @@ section.home .content.active .head{
 .contact .glass p{
   text-align: left;
 }
+
+.contact .glass p a{
+  display: flex;
+  align-items: center;
+  line-height: 2;
+}
+
 .contact .glass p a:hover > *{
   color: #770;
   transition: all .6s;
 }
-.contact .glass a i{
+
+.contact .glass a svg{
   display: inline-block;
   width: 2em;
 }
